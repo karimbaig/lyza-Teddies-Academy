@@ -1,12 +1,12 @@
+import { ChildcareApproach } from "@/components/ChildcareApproach";
+import { NurseryGallery } from "@/components/NurseryGallery";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { PageHero } from "@/components/PageHero";
 import { Reveal, Parallax } from "@/components/Motion";
 import { PROGRAMMES } from "@/lib/site";
-import reading from "@/assets/teddy-reading.png";
-import room from "@/assets/nursery-room.jpg";
-import garden from "@/assets/kids-garden.jpg";
-import painting from "@/assets/kids-painting.jpg";
+import reading from "@/assets/teddy-reading.webp";
+import { NURSERY_FEATURE } from "@/lib/nursery-photos";
 import { IconHeart, IconShield, IconBook, IconTree, IconSun, IconPaw, IconArrow, RainbowArc } from "@/components/Icons";
 
 const D = "Meet Lyza's Teddies Academy: a warm, EYFS-led nursery in Canary Wharf founded in 2023, blending Montessori and Reggio Emilia-inspired play for ages 3 months to 7 years.";
@@ -51,11 +51,14 @@ function About() {
           <p className="mt-4 text-lg text-muted-foreground">Every room through the setting is thoughtfully designed to spark curiosity. From our cosy reading nooks filled with teddy bears to our vibrant learning spaces, each area invites children to learn through wonder and joy.</p>
           <p className="mt-4 text-lg text-muted-foreground">Parents tell us what they value most is the warmth: knowing their child is cared for like family, and hearing all about their day — the activities, the outdoor adventures and every new milestone.</p>
         </Reveal>
-        <div className="relative h-[30rem]">
-          <Parallax speed={0.2} className="absolute right-0 top-0 w-[70%]"><img src={room} alt="Nursery playroom" width={1536} height={1024} loading="lazy" className="aspect-[4/5] rounded-[2.5rem] border-[3px] border-ink object-cover shadow-pop" /></Parallax>
-          <Parallax speed={-0.2} rotate={5} className="absolute bottom-0 left-0 w-[50%]"><img src={painting} alt="Children painting" width={1024} height={1280} loading="lazy" className="aspect-square -rotate-3 rounded-[2rem] border-[3px] border-ink object-cover shadow-pop" /></Parallax>
+        <div className="relative h-[25rem] sm:h-[30rem]">
+          <Parallax speed={0.2} className="absolute right-0 top-0 w-[70%]"><img src={NURSERY_FEATURE.story.src} alt={NURSERY_FEATURE.story.alt} width={1200} height={900} loading="lazy" className="aspect-[4/5] rounded-[2.5rem] border-[3px] border-ink object-cover shadow-pop" /></Parallax>
+          <Parallax speed={-0.2} rotate={5} className="absolute bottom-0 left-0 w-[50%]"><img src={NURSERY_FEATURE.creative.src} alt={NURSERY_FEATURE.creative.alt} width={1200} height={675} loading="lazy" className="aspect-square -rotate-3 rounded-[2rem] border-[3px] border-ink object-cover shadow-pop" /></Parallax>
         </div>
       </section>
+
+      <ChildcareApproach />
+      <NurseryGallery />
 
       <section className="bg-ink py-24 text-on-dark">
         <div className="mx-auto max-w-7xl px-6">
@@ -106,8 +109,8 @@ function About() {
         </div>
         <div className="mx-auto mt-16 max-w-7xl px-6">
           <div className="relative overflow-hidden rounded-[3rem] border-[3px] border-ink shadow-pop">
-            <img src={garden} alt="Children gardening with their teacher" width={1280} height={1024} loading="lazy" className="h-[26rem] w-full object-cover" />
-            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 to-transparent p-10">
+            <img src={NURSERY_FEATURE.community.src} alt={NURSERY_FEATURE.community.alt} width={1200} height={900} loading="lazy" className="h-[26rem] w-full object-cover" />
+            <div className="absolute inset-0 flex items-end bg-gradient-to-t from-ink/80 to-transparent p-6 md:p-10">
               <div className="text-on-dark">
                 <h2 className="text-4xl font-bold">Come and see us in action</h2>
                 <Link to="/contact" className="btn-pop mt-5">Book a Visit <IconArrow className="h-5 w-5" /></Link>

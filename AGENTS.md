@@ -33,3 +33,6 @@ use the editor.
 - Shared business content (reviews, FAQs, menu, contact details) lives in `src/lib/site.ts` so every page reads one source.
 - The 3D hero scene loads only in the browser (lazy + ClientOnly) because WebGL cannot run during server rendering.
 - Contact messages go to the `contact_submissions` table with insert-only public access.
+- Resolve uploaded media through `assetUrl` with the verified public asset origin so external hosts do not need Lovable's private path routing.
+- Use lightweight WebP decorations and defer desktop-only WebGL until after hydration; mobile and reduced-motion visitors retain visible static artwork.
+- Keep nursery image references and dimensions in `src/lib/nursery-photos.ts`; upload only reviewed privacy-processed derivatives, never original identifiable child photos.

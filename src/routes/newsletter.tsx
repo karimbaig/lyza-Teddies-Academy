@@ -1,8 +1,10 @@
+import { Button } from "@/components/ui/button";
+import { assetUrl } from "@/lib/assets";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { PageHero } from "@/components/PageHero";
-import teddy from "@/assets/teddy-reading.png";
+import teddy from "@/assets/teddy-reading.webp";
 import s1 from "@/assets/nl/sep-1.jpg.asset.json";
 import s2 from "@/assets/nl/sep-2.jpg.asset.json";
 import s3 from "@/assets/nl/sep-3.jpg.asset.json";
@@ -14,6 +16,8 @@ import o5 from "@/assets/nl/oct-5.jpg.asset.json";
 import sepPdf from "@/assets/nl/sep.pdf.asset.json";
 import octPdf from "@/assets/nl/oct.pdf.asset.json";
 import { IconArrow, IconDownload } from "@/components/Icons";
+
+const MotionButton = motion.create(Button);
 
 const D = "Read the Lyza's Teddies Academy monthly newsletters as a page-turning flip-book — news, learning themes and celebrations from our Canary Wharf nursery.";
 export const Route = createFileRoute("/newsletter")({
@@ -29,8 +33,8 @@ export const Route = createFileRoute("/newsletter")({
 });
 
 const ISSUES = [
-  { id: "oct", title: "October 2026", tone: "bg-butter", pages: [o1, o2, o3, o4, o5].map((p) => p.url), pdf: octPdf.url },
-  { id: "sep", title: "September 2026", tone: "bg-sky", pages: [s1, s2, s3].map((p) => p.url), pdf: sepPdf.url },
+  { id: "oct", title: "October 2026", tone: "bg-butter", pages: [o1, o2, o3, o4, o5].map((p) => assetUrl(p)), pdf: assetUrl(octPdf) },
+  { id: "sep", title: "September 2026", tone: "bg-sky", pages: [s1, s2, s3].map((p) => assetUrl(p)), pdf: assetUrl(sepPdf) },
 ];
 
 function FlipBook({ pages, title }: { pages: string[]; title: string }) {
@@ -60,25 +64,26 @@ function FlipBook({ pages, title }: { pages: string[]; title: string }) {
             className="absolute inset-0 h-full w-full cursor-grab rounded-[1.5rem] border-[3px] border-ink bg-card object-contain active:cursor-grabbing"
           />
         </AnimatePresence>
-        <button onClick={() => go(page - 1)} disabled={page === 0} aria-label="Previous page" className="absolute -left-4 top-1/2 z-10 grid h-14 w-14 -translate-y-1/2 place-items-center rounded-full border-[2.5px] border-ink bg-card shadow-pop-sm disabled:opacity-30 md:-left-8"><IconArrow className="h-6 w-6 rotate-180" /></button>
-        <button onClick={() => go(page + 1)} disabled={page === pages.length - 1} aria-label="Next page" className="absolute -right-4 top-1/2 z-10 grid h-14 w-14 -translate-y-1/2 place-items-center rounded-full border-[2.5px] border-ink bg-cherry text-primary-foreground shadow-pop-sm disabled:opacity-30 md:-right-8"><IconArrow className="h-6 w-6" /></button>
+        <Button variant="plain" onClick={() => go(page - 1)} disabled={page === 0} aria-label="Previous page" className="absolute -left-4 top-1/2 z-10 grid h-14 w-14 -translate-y-1/2 place-items-center rounded-full border-[2.5px] border-ink bg-card shadow-pop-sm disabled:opacity-30 md:-left-8"><IconArrow className="h-6 w-6 rotate-180" /></Button>
+        <Button variant="plain" onClick={() => go(page + 1)} disabled={page === pages.length - 1} aria-label="Next page" className="absolute -right-4 top-1/2 z-10 grid h-14 w-14 -translate-y-1/2 place-items-center rounded-full border-[2.5px] border-ink bg-cherry text-primary-foreground shadow-pop-sm disabled:opacity-30 md:-right-8"><IconArrow className="h-6 w-6" /></Button>
       </div>
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         {pages.map((p, i) => (
-          <button key={p} onClick={() => go(i)} aria-label={`Go to page ${i + 1}`}
+          <Button variant="plain" key={p} onClick={() => go(i)} aria-label={`Go to page ${i + 1}`}
             className={`overflow-hidden rounded-xl border-[2.5px] border-ink transition-all ${i === page ? "-translate-y-2 rotate-[-3deg] shadow-pop-sm" : "opacity-60 hover:opacity-100"}`}>
             <img src={p} alt="" className="h-24 w-[4.25rem] object-cover" loading="lazy" />
-          </button>
+          </Button>
         ))}
       </div>
-      <p className="mt-4 text-center font-display text-muted-foreground">Page {page + 1} of {pages.length} · swipe or tap the arrows to turn</p>
+      <p className="mt-4 text-center font-display text-muted-foreground">Page {page + 1} of {pages.length}</p>
     </div>
   );
 }
 
 function NewsletterPage() {
   const [active, setActive] = useState(0);
-  const issue = ISSUES[active] ?? ISSUES[0]!;
+  const issue = ISSUES[active] ?? ISSUES[0];
+  if (!issue) return null;
   return (
     <>
       <PageHero kicker="Monthly news" title={<>Our nursery <span className="text-rainbow">newsletters</span></>} art={teddy}>
@@ -87,10 +92,10 @@ function NewsletterPage() {
       <section className="mx-auto max-w-5xl px-6 py-12">
         <div className="flex flex-wrap justify-center gap-4">
           {ISSUES.map((is, i) => (
-            <motion.button key={is.id} onClick={() => setActive(i)} whileHover={{ rotate: -2, y: -4 }}
+            <MotionButton variant="plain" key={is.id} onClick={() => setActive(i)} whileHover={{ rotate: -2, y: -4 }}
               className={`rounded-3xl border-[2.5px] border-ink px-7 py-4 font-display text-xl font-semibold ${i === active ? `${is.tone} shadow-pop-sm` : "bg-card"}`}>
               {is.title}
-            </motion.button>
+            </MotionButton>
           ))}
         </div>
         <div className="mt-14">

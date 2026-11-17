@@ -1,12 +1,16 @@
+import { Button } from "@/components/ui/button";
+import { assetUrl } from "@/lib/assets";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Motion";
 import { MENU, MENU_NOTES } from "@/lib/site";
-import food from "@/assets/food.png";
+import food from "@/assets/food.webp";
 import menuPdf from "@/assets/menu.pdf.asset.json";
 import { IconSun, IconApple, IconHeart, IconPalette, IconBook, IconDownload, IconShield } from "@/components/Icons";
+
+const MotionButton = motion.create(Button);
 
 const D = "See this week's fresh, balanced nursery menu at Lyza's Teddies Academy — breakfast, snacks, lunch and tea for every weekday, following DfE early years nutrition guidance.";
 export const Route = createFileRoute("/menu")({
@@ -26,21 +30,22 @@ const mealIcon: Record<string, typeof IconSun> = { Breakfast: IconSun, "Morning 
 
 function MenuPage() {
   const [d, setD] = useState(0);
-  const day = MENU[d] ?? MENU[0]!;
+  const day = MENU[d] ?? MENU[0];
+  if (!day) return null;
   return (
     <>
       <PageHero kicker="Fresh · Balanced · Varied" title={<>Our weekly <span className="text-rainbow">menu</span></>} art={food}>
         A varied Monday–Friday menu for children aged 1 year and over, lovingly prepared to keep little tummies happy.
-        <div className="mt-6"><a href={menuPdf.url} target="_blank" rel="noreferrer" className="btn-ghost"><IconDownload className="h-5 w-5" /> Download PDF menu</a></div>
+        <div className="mt-6"><a href={assetUrl(menuPdf)} target="_blank" rel="noreferrer" className="btn-ghost"><IconDownload className="h-5 w-5" /> Download PDF menu</a></div>
       </PageHero>
 
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="flex flex-wrap justify-center gap-3">
           {MENU.map((m, i) => (
-            <motion.button key={m.day} onClick={() => setD(i)} whileHover={{ y: -4 }} whileTap={{ scale: 0.92 }}
+            <MotionButton variant="plain" key={m.day} onClick={() => setD(i)} whileHover={{ y: -4 }} whileTap={{ scale: 0.92 }}
               className={`rounded-full border-[2.5px] border-ink px-6 py-3 font-display text-lg font-semibold transition-all ${i === d ? `${tone[m.tone]} shadow-pop-sm -translate-y-1` : "bg-card"}`}>
               {m.day}
-            </motion.button>
+            </MotionButton>
           ))}
         </div>
 
@@ -57,7 +62,7 @@ function MenuPage() {
                   <motion.div key={m.label} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.1 + i * 0.07, type: "spring" }}
                     className={`rounded-[2rem] border-[2.5px] border-ink bg-card p-6 ${i === 2 ? "lg:row-span-2" : ""}`}>
                     <div className="flex items-center gap-3">
-                      <span className="grid h-12 w-12 place-items-center rounded-2xl border-2 border-ink bg-butter"><I className="h-8 w-8" /></span>
+                      <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl border-2 border-ink bg-butter"><I className="h-8 w-8" /></span>
                       <h3 className="font-display text-sm font-semibold uppercase tracking-widest text-cherry">{m.label}</h3>
                     </div>
                     <p className="mt-4 font-display text-xl font-medium leading-snug">{m.dish}</p>

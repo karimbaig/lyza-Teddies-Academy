@@ -1,6 +1,7 @@
+import { assetUrl } from "@/lib/assets";
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.jpg.asset.json";
-import teddy from "@/assets/teddy-mascot.png";
+import teddy from "@/assets/teddy-mascot.webp";
 import { SITE } from "@/lib/site";
 import { IconPhone, IconPin, IconClock, IconStar, Cloud, Sparkle } from "./Icons";
 import { Parallax } from "./Motion";
@@ -15,7 +16,7 @@ export function SiteFooter() {
       <Sparkle className="absolute right-[12%] top-28 h-6 w-6 text-butter animate-floaty" />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-6 pb-10 pt-28 md:grid-cols-12">
         <div className="md:col-span-4">
-          <img src={logo.url} alt={`${SITE.name} logo`} className="h-20 rounded-2xl" />
+          <img src={assetUrl(logo)} alt={`${SITE.name} logo`} width={160} height={96} loading="lazy" className="h-24 w-40 rounded-lg bg-card object-contain" />
           <p className="mt-5 max-w-sm text-on-dark/75">
             A warm, home-from-home nursery in Canary Wharf where children aged 3 months to 7 years learn, play and grow — since 2023.
           </p>

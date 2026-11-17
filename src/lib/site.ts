@@ -27,6 +27,7 @@ export const PROGRAMMES = [
 ] as const;
 
 export const FAQS = [
+  { q: "Do you offer flexible childcare?", a: "Yes. We offer hourly bookings and term-time-only places. Contact us to discuss the childcare arrangements your family needs." },
   { q: "What ages do you care for?", a: "We welcome children from 3 months to 7 years, grouped into Little Cubs (3 months – 2 years), Creative Explorers (2 – 3 years) and Pre-School Pioneers (3 – 7 years)." },
   { q: "Where are you located?", a: "We are at Unit 5, Laybourne House, Admirals Way, London E14 9UH — in the heart of Canary Wharf, close to transport links for busy working families." },
   { q: "What are your opening hours?", a: "We are open Monday to Friday and close at 6 pm. Call us on +44 7845 589174 to talk through drop-off times that suit your family." },
@@ -85,5 +86,37 @@ export const MENU_NOTES = {
     "A full-course paediatric first-aid-trained staff member is always in the room while children eat.",
     "Textures and cutting are adapted for each child: small round foods quartered lengthways, bones removed, no whole nuts, whole seeds, popcorn or raw jelly cubes for under-5s.",
     "Likely allergens in these recipes include milk, egg, fish and cereals containing gluten. We check every recipe and supplier label, prevent cross-contact and follow each child's allergy/dietary plan.",
+  ],
+};
+
+
+export const CHILDCARE = {
+  flexible: "We offer very flexible childcare, from hourly bookings to term-time-only places. We understand parents and families cannot be superheroes all the time, so our flexible childcare is an extra helping hand for tough times.",
+  individual: "We enable children to become independent learners who value learning with and from others, and help them develop a positive attitude to education.",
+  principles: [
+    "Give children time to reflect, practise and learn with no sense of failure.",
+    "Encourage a positive attitude towards themselves and others, with a strong sense of self-respect.",
+    "Provide a high-quality, broad and challenging curriculum based on learning through play, with regard to the Early Years Foundation Stage.",
+    "Build on children's personal interests and stage of development, encouraging their true potential in all areas of learning.",
+    "Combine the security, happiness, comfort and care of home with the stimulation, learning and social awareness of a professionally run group experience.",
+    "Develop policies and procedures that support a high-quality Early Years curriculum.",
+    "Use a range of teaching approaches to extend our understanding of how children learn.",
+    "Provide a happy, safe and stimulating environment where children, parents, carers and visitors feel welcomed and valued.",
+    "Invite parents and carers to work in partnership with us, nurturing enthusiasm for learning and celebrating children's achievements.",
+    "Help children respect other people's property, ideas and beliefs, irrespective of gender, race, disability or academic achievement.",
+    "Respond to the needs of children and families in the local community.",
+    "Work within a framework that enables inclusion for all children and families.",
+  ],
+  listening: [
+    "Observe and learn from what children say and do.",
+    "Strive to understand the other person's point of view.",
+    "Respect the experiences of others.",
+    "Create a shared dialogue and learn from one another.",
+    "Be an open and willing learner.",
+  ],
+  pillars: [
+    { title: "Intent", text: "Our goal is to wow, inspire and nourish young minds. Not literally, of course — that's what our meals take care of!" },
+    { title: "Impact", text: "We measure success by smiles, 'aha!' moments, and the occasional joyful 'look, I did it!' dance." },
+    { title: "Implementation", text: "We blend a pinch of traditional learning with a whole lot of hands-on fun." },
   ],
 };

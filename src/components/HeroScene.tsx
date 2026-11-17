@@ -14,10 +14,10 @@ function Rainbow() {
   });
   const arcs = [PINK, RED, SKY, BUTTER];
   return (
-    <group ref={g} position={[0, -2.2, -1.5]} scale={0.85}>
+    <group ref={g} position={[0, -1.6, -1.5]} scale={0.62}>
       {arcs.map((c, i) => (
         <mesh key={c} castShadow>
-          <torusGeometry args={[2.6 - i * 0.42, 0.2, 32, 96, Math.PI]} />
+          <torusGeometry args={[2.6 - i * 0.42, 0.2, 16, 64, Math.PI]} />
           <meshPhysicalMaterial color={c} roughness={0.35} clearcoat={1} clearcoatRoughness={0.25} />
         </mesh>
       ))}
@@ -35,7 +35,7 @@ function Toy({ position, color, kind, speed = 1 }: { position: [number, number, 
         <RoundedBox ref={m} args={[0.7, 0.7, 0.7]} radius={0.14} smoothness={4} position={position}>{mat}</RoundedBox>
       ) : (
         <mesh ref={m} position={position}>
-          {kind === "ball" && <sphereGeometry args={[0.38, 48, 48]} />}
+          {kind === "ball" && <sphereGeometry args={[0.38, 24, 24]} />}
           {kind === "ring" && <torusGeometry args={[0.32, 0.13, 24, 48]} />}
           {kind === "star" && <octahedronGeometry args={[0.38, 0]} />}
           {mat}
@@ -47,7 +47,7 @@ function Toy({ position, color, kind, speed = 1 }: { position: [number, number, 
 
 export default function HeroScene() {
   return (
-    <Canvas dpr={[1, 1.8]} camera={{ position: [0, 0.3, 7], fov: 40 }} gl={{ antialias: true, alpha: true }}>
+    <Canvas dpr={[1, 1.25]} camera={{ position: [0, 0.3, 7], fov: 40 }} gl={{ antialias: true, alpha: true }}>
       <ambientLight intensity={0.7} />
       <directionalLight position={[4, 6, 5]} intensity={1.4} castShadow />
       <Rainbow />
@@ -59,7 +59,7 @@ export default function HeroScene() {
       <Toy position={[-4.1, -0.3, -1.5]} color={SKY} kind="ring" speed={0.9} />
       <Toy position={[4.2, 0.2, -1.2]} color={BUTTER} kind="block" speed={0.6} />
       <ContactShadows position={[0, -1.3, 0]} opacity={0.25} scale={12} blur={2.6} far={3} />
-      <Environment resolution={256}>
+      <Environment resolution={64}>
         <Lightformer intensity={2} position={[0, 5, 0]} scale={[10, 10, 1]} />
         <Lightformer intensity={1.2} color="#ffd6e4" position={[-5, 1, -1]} rotation-y={Math.PI / 2} scale={[20, 1, 1]} />
         <Lightformer intensity={1.2} color="#cdeefe" position={[5, 1, 1]} rotation-y={-Math.PI / 2} scale={[20, 1, 1]} />

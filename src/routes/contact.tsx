@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, type FormEvent } from "react";
@@ -6,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Motion";
 import { SITE } from "@/lib/site";
-import teddy from "@/assets/teddy-mascot.png";
+import teddy from "@/assets/teddy-mascot.webp";
 import { IconPhone, IconPin, IconClock, IconArrow, IconHeart } from "@/components/Icons";
 
 const D = "Contact Lyza's Teddies Academy in Canary Wharf: Unit 5, Laybourne House, Admirals Way, London E14 9UH. Call +44 7845 589174 or send a message to book a visit.";
@@ -69,7 +70,7 @@ function Contact() {
               <motion.a href={c.href} target={c.href?.startsWith("http") ? "_blank" : undefined} rel="noreferrer" whileHover={{ x: 8, rotate: -1 }}
                 className="flex items-center gap-5 rounded-[2rem] border-[2.5px] border-ink bg-card p-6 shadow-pop-sm">
                 <span className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl border-2 border-ink ${c.c}`}><c.I className="h-8 w-8" /></span>
-                <span><span className="block font-display text-sm uppercase tracking-widest text-cherry">{c.t}</span><span className="font-display text-xl font-semibold">{c.v}</span></span>
+                <span className="min-w-0"><span className="block font-display text-sm uppercase tracking-widest text-cherry">{c.t}</span><span className="font-display text-xl font-semibold">{c.v}</span></span>
               </motion.a>
             </Reveal>
           ))}
@@ -91,16 +92,16 @@ function Contact() {
                 <motion.form key="form" onSubmit={onSubmit} exit={{ opacity: 0, y: -20 }} className="space-y-5" noValidate>
                   <h2 className="text-4xl font-bold">Book a visit</h2>
                   <div className="grid gap-5 md:grid-cols-2">
-                    <input name="parent_name" placeholder="Your name *" className={field} maxLength={100} required />
-                    <input name="email" type="email" placeholder="Email *" className={field} maxLength={255} required />
-                    <input name="phone" type="tel" placeholder="Phone" className={field} maxLength={30} />
-                    <input name="child_age" placeholder="Child's age" className={field} maxLength={50} />
+                    <input name="parent_name" aria-label="Your name" autoComplete="name" placeholder="Your name *" className={field} maxLength={100} required />
+                    <input name="email" type="email" aria-label="Email" autoComplete="email" placeholder="Email *" className={field} maxLength={255} required />
+                    <input name="phone" type="tel" aria-label="Phone" autoComplete="tel" placeholder="Phone" className={field} maxLength={30} />
+                    <input name="child_age" aria-label="Child's age" placeholder="Child's age" className={field} maxLength={50} />
                   </div>
-                  <textarea name="message" rows={5} placeholder="How can we help? *" className={field} maxLength={2000} required />
+                  <textarea name="message" rows={5} aria-label="Message" placeholder="How can we help? *" className={field} maxLength={2000} required />
                   {error && <p role="alert" className="rounded-2xl bg-card px-4 py-3 font-semibold text-destructive">{error}</p>}
-                  <button type="submit" disabled={state === "sending"} className="btn-pop">
+                  <Button variant="play" type="submit" disabled={state === "sending"} className="btn-pop">
                     {state === "sending" ? "Sending…" : "Send message"} <IconArrow className="h-5 w-5" />
-                  </button>
+                  </Button>
                 </motion.form>
               )}
             </AnimatePresence>
